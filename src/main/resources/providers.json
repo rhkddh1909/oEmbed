@@ -1,18 +1,36 @@
-{
-  "provider_name": "YouTube",
-  "provider_url": "https://www.youtube.com/",
-  "endpoints": [
-    {
-      "schemes": [
-        "https://*.youtube.com/watch*",
-        "https://*.youtube.com/v/*",
-        "https://youtu.be/*",
-        "https://*.youtube.com/playlist?list=*",
-        "https://youtube.com/playlist?list=*",
-        "https://*.youtube.com/shorts*"
-      ],
-      "url": "https://www.youtube.com/oembed",
-      "discovery": true
-    }
-  ]
-}
+[
+  {
+    "provider_name": "Acast",
+    "provider_url": "https://embed.acast.com",
+    "endpoints": [
+      {
+        "schemes": [
+          "https://play.acast.com/s/*"
+        ],
+        "url": "https://oembed.acast.com/v1/embed-player",
+        "discovery": true,
+        "formats": [
+          "json"
+        ]
+      }
+    ]
+  },
+  {
+    "provider_name": "YouTube",
+    "provider_url": "https://www.youtube.com/",
+    "endpoints": [
+      {
+        "schemes": [
+          "https://*.youtube.com/watch*",
+          "https://*.youtube.com/v/*",
+          "https://youtu.be/*",
+          "https://*.youtube.com/playlist?list=*",
+          "https://youtube.com/playlist?list=*",
+          "https://*.youtube.com/shorts*"
+        ],
+        "url": "https://www.youtube.com/oembed",
+        "discovery": true
+      }
+    ]
+  }
+]

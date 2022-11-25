@@ -1,7 +1,6 @@
 package com.example.oemded.provider.serviceimpl;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
@@ -25,7 +24,7 @@ class ProviderServiceImplTest {
         mockServer.expect(requestTo("https://oembed.com/providers.json"))
                 .andRespond(withSuccess(new ClassPathResource("/providers.json",getClass()), MediaType.APPLICATION_JSON));
         //when
-        JSONObject testRslt = providerService.getProviders("https://oembed.com/providers.json");
+        JSONArray testRslt = providerService.getProviders("https://oembed.com/providers.json");
 
         //then
         assertThat(testRslt).isNull();
