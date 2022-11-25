@@ -12,6 +12,8 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.client.MockRestServiceServer;
 
+import java.util.Map;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
@@ -47,7 +49,7 @@ class OEmbedServiceImplTest {
         mockServer.expect(requestTo("https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v%3DdBD54EZIrZo&format=json"))
                 .andRespond(withSuccess(new ClassPathResource("/youtube.json",getClass()), MediaType.APPLICATION_JSON));
         //when
-        JSONObject oEmbedJson = null;
+        Map<String,Object> oEmbedJson = null;
         oEmbedJson = oEmbedService.getOEbed(strUrl);
 
         //then

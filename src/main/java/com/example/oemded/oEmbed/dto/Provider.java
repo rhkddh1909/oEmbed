@@ -2,13 +2,14 @@ package com.example.oemded.oEmbed.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.List;
 
 
-@Data
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Provider implements Serializable {

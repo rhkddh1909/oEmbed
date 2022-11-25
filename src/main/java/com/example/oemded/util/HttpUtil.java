@@ -8,7 +8,7 @@ public class HttpUtil {
 
     public static HttpEntity getHttpEntity() {
         HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE);
+        headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
 
         HttpEntity entity = new HttpEntity(headers);
         System.out.println(entity.getHeaders());
