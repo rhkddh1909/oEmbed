@@ -1,6 +1,7 @@
-package com.example.oemded.provider.serviceimpl;
+package com.example.oemded.util;
 
-import org.json.JSONArray;
+import com.example.oemded.oEmbed.dto.Providers;
+import com.example.oemded.oEmbed.service.serviceimpl.OEmbedServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
@@ -12,21 +13,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
-@RestClientTest(ProviderServiceImpl.class)
-class ProviderServiceImplTest {
+@RestClientTest(OEmbedServiceImpl.class)
+class ProviderUtilTest {
     @Autowired
     private MockRestServiceServer mockServer;
     @Autowired
-    private ProviderServiceImpl providerService;
+    private OEmbedServiceImpl oEmbedService;
+
     @Test
-    public void test_getProviders(){
+    public void getProviderTest(){
         //Stubbing
+        String strUrl = "https://www.youtube.com/watch?v=dBD54EZIrZo";
         mockServer.expect(requestTo("https://oembed.com/providers.json"))
                 .andRespond(withSuccess(new ClassPathResource("/providers.json",getClass()), MediaType.APPLICATION_JSON));
         //when
-        JSONArray testRslt = providerService.getProviders("https://oembed.com/providers.json");
-
+        Providers testProviders = oEmbedService.getProviders();
+        String providerOEmbedUrl = ProviderUtil.getProviderOEmbedUrl(strUrl,testProviders);
         //then
-        assertThat(testRslt).isNull();
+        assertThat(providerOEmbedUrl).isEqualTo("https://www.youtube.com/oembed");
     }
 }
