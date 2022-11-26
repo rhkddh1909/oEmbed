@@ -2,8 +2,6 @@ package com.example.oemded.oEmbed.service;
 
 import com.example.oemded.oEmbed.dto.Providers;
 import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.Map;
 
 public interface OEmbedService {

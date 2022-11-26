@@ -1,10 +1,12 @@
 package com.example.oemded.oEmbed.controller;
 
+import com.example.oemded.code.OEMBED_CODE;
 import com.example.oemded.oEmbed.dto.BaseDto;
 import com.example.oemded.oEmbed.dto.OEmbedReq;
 import com.example.oemded.oEmbed.service.OEmbedService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,19 +25,26 @@ public class OEmbedAPiController {
         log.info("reqUrl=>{}",reqUrl);
         try{
             Map<String, Object> oEmbed = oEmbedService.getOEbed(reqUrl.getStrUrl());
-            log.info("oEmbed=>{}",oEmbed);
+            log.info("oEmbedResult=>{}",oEmbed);
 
             return ResponseEntity.ok().body(BaseDto.builder()
-                    .STATUS("0000")
+                    .STATUS(OEMBED_CODE.STATUS.OK.CODE())
                     .RSLT_MSG("")
                     .RSLT_DATA(oEmbed)
+                    .build());
+        }
+        catch(JSONException e){
+            log.info("JSONException=>{]",e.getMessage());
+            return ResponseEntity.ok().body(BaseDto.builder()
+                    .STATUS(OEMBED_CODE.STATUS.ERROR.CODE())
+                    .RSLT_MSG("JSON parsing 오류입니다.")
                     .build());
         }
         catch(Exception e){
             log.info("Exception={}", e.getMessage());
             return ResponseEntity.ok().body(BaseDto.builder()
-                    .STATUS("9999")
-                    .RSLT_MSG("오류")
+                    .STATUS(OEMBED_CODE.STATUS.ERROR.CODE())
+                    .RSLT_MSG(e.getMessage())
                     .build());
         }
     }

@@ -1,11 +1,11 @@
 package com.example.oemded.oEmbed.service.serviceimpl;
 
+import com.example.oemded.exception.OEmbedException;
 import com.example.oemded.oEmbed.dto.Provider;
 import com.example.oemded.oEmbed.dto.Providers;
 import com.example.oemded.oEmbed.service.OEmbedService;
 import com.example.oemded.util.HttpUtil;
 import com.example.oemded.util.ProviderUtil;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -52,7 +52,8 @@ public class OEmbedServiceImpl implements OEmbedService{
         log.info("header=>{}",entity.getHeaders());
         log.info("body=>{}",entity.getBody());
 
-        Map<String, Object> oEmbedMap = restTemplate.exchange(getOEmbedUrl, HttpMethod.GET, entity,Map.class,param).getBody();
+        Map<String, Object> oEmbedMap = Optional.ofNullable(restTemplate.exchange(getOEmbedUrl, HttpMethod.GET, entity,Map.class,param).getBody())
+                .orElseThrow(()->new OEmbedException("OEmbed api 호출에 실패했습니다."));
         log.info("oEmbedJson=>{}",oEmbedMap);
         JSONObject jo = new JSONObject(oEmbedMap);
 
@@ -70,7 +71,7 @@ public class OEmbedServiceImpl implements OEmbedService{
         log.info("header=>{}",entity.getHeaders());
         log.info("body=>{}",entity.getBody());
         Provider[] providerArr = Optional.ofNullable(restTemplate.exchange("https://oembed.com/providers.json",HttpMethod.GET, entity, Provider[].class).getBody())
-                .orElseThrow();
+                .orElseThrow(()->new OEmbedException("Providers api 호출에 실패했습니다."));
         log.info("providerArr.length=>{}",providerArr.length);
         log.info("providerList=>{}", Arrays.stream(providerArr).toList());
 

@@ -1,5 +1,6 @@
 package com.example.oemded.util;
 
+import com.example.oemded.exception.OEmbedUtilException;
 import com.example.oemded.oEmbed.dto.Providers;
 public class ProviderUtil {
 
@@ -15,6 +16,6 @@ public class ProviderUtil {
                 )
                 .findFirst()
                 .map(provider -> provider.getEndpoints().get(0).getUrl())
-                .orElseThrow();
+                .orElseThrow(()-> new OEmbedUtilException("cannot found Provider.EndPoing.Schemes"));
     }
 }

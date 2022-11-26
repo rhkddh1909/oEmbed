@@ -1,0 +1,50 @@
+.div_1{position: center;
+    left: 50%;
+    width:90%;
+    margin-left: 5%;
+}
+.div_2{background-color: #2eaab7; height: 210px;}
+.header{text-align: center; color: white; font-size: 20px; padding-top: 30px; font-weight: bolder;}
+.searchBar{text-align: center; padding-top: 50px;}
+.search{width:90%; height: 60px;border:none;}
+.btn{background-color: #d8c90e; margin-left: -80px;width: 60px; height: 40px; font-weight: bold; border:none;}
+.div_3{background-color: #cae3ed;}
+.title{font-size:20px; font-weight: bold; height: auto; display:inline-block;padding-top: 15px; padding-bottom: 15px}
+.body{font-weight: bold; height: auto; display:inline-block;padding-top: 15px; padding-bottom: 15px}
+.grey{background-color:#f4f4f4;}
+#content{margin-right: 20px; margin-bottom: 20px; margin-left: 20px; background-color: white; height: 2500px;}
+table{width: 200px;}
+tr{width:200px;}
+td{ text-align: center;  margin-top: 30px;}
+.div_4{overflow: auto; height: 100%; block-size: fit-content; display: block;}
+span{display: block; white-space: normal; block-size:auto;}
+input {
+    width:200px;
+    height:100px;
+    font-size:20px;
+    font-weight: bold;
+}
+xmp{
+    vertical-align: middle;
+    text-align: center;
+    width: 85%;
+    float: right;
+    height: auto;
+    white-space: normal ;
+}
+div span:nth-child(1){
+    vertical-align: middle;
+    text-align: center;
+    padding-bottom: inherit;
+    float: left;
+    width: 15%;
+    height: 100%;
+}
+div span:nth-child(2){
+    vertical-align: middle;
+    text-align: center;
+    width: 85%;
+    float: right;
+    height: 100%;
+
+}
