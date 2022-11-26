@@ -17,51 +17,59 @@
             data :  JSON.stringify(param),
             dataType : "json",
             success : function(result){
-                $("#content").children().remove();
-                $("#content").append("<table style='width:1000px;'>");
-                $("#content").append("<div class='div_4'> " + "<span class='title'>"+"title"+"</span><span class='title'>" + result.rslt_DATA.title + "</span></div>");
-                let index = 0;
-                for(const [key,value] of Object.entries(result.rslt_DATA)){
-                    if(key != "title"){
-                        let convertValue = value;
-                        let convertKey = key;
-                        if(key.includes("url")){
-                             convertValue = "<a href="+ value + ">"+value+"</a>";
-                        }
-                        else if(key == "html"){
-                            convertValue = result.rslt_DATA.html;
-                            convertKey = "html<br/>(" + result.rslt_DATA.width + "/" + result.rslt_DATA.height + ")";
-                        }
-
-                        if(index%2 == 1){
-                            if(key == "html"){
-                                $("#content").append("<div class='div_4'> " + "<span class='body'>"+convertKey+"</span><span class='body'><xmp>" + convertValue + "</xmp></span></div>");
-                                $("#content").append("<div class='div_4'> " + "<span class='body'></span><span class='body'>"+convertValue+"</span></div>");
+                if(result.status == "0000"){
+                    $("#content").children().remove();
+                    $("#content").append("<table style='width:1000px;'>");
+                    $("#content").append("<div class='div_4'> " + "<span class='title'>"+"title"+"</span><span class='title'>" + result.rslt_DATA.title + "</span></div>");
+                    let index = 0;
+                    for(const [key,value] of Object.entries(result.rslt_DATA)){
+                        if(key != "title"){
+                            let convertValue = value;
+                            let convertKey = key;
+                            if(key.includes("url")){
+                                 convertValue = "<a href="+ value + ">"+value+"</a>";
                             }
-                            else if(key == "thumbnail_url"){
-                                $("#content").append("<div class='div_4'> " + "<span class='body'>"+convertKey+"</span><span class='body'>"+convertValue+"</span></div>");
-                                $("#content").append("<div class='div_4'> " + "<span class='body'></span><span class='body'>"+ "<img src="+value+"></span></div>");
+                            else if(key == "html"){
+                                convertValue = result.rslt_DATA.html;
+                                convertKey = "html<br/>(" + result.rslt_DATA.width + "/" + result.rslt_DATA.height + ")";
                             }
-                            else{
-                                $("#content").append("<div class='div_4'> " + "<span class='body'>"+convertKey+"</span><span class='body'>" + convertValue + "</span></div>");
-                            }
-                        }
-                        else{
-                            if(key.includes("html")){
-                                $("#content").append("<div class='div_4 grey'> " + "<span class='body'>"+convertKey+"</span><span class='body'><xmp>" + convertValue + "</xmp></span></div>");
-                                $("#content").append("<div class='div_4 grey'> " + "<span class='body'></span><span class='body'>"+convertValue+"</span></div>");
-                            }
-                            else if(key == "thumbnail_url"){
-                                $("#content").append("<div class='div_4 grey'> " + "<span class='body'>"+convertKey+"</span><span class='body'>"+convertValue+"</span></div>");
-                                $("#content").append("<div class='div_4 grey'> " + "<span class='body'></span><span class='body'>"+ "<img src="+value+"></span></div>");
-                            }
-                            else{
-                                $("#content").append("<div class='div_4 grey'> " + "<span class='body'>"+convertKey+"</span><span class='body'>" + convertValue + "</span></div>");
+                            else if(key == "thumbnail_urlhttps"){
+                                convertKey = "html<br/>(" + result.rslt_DATA.thumbnail_width + "/" + result.rslt_DATA.thumbnail_height + ")";
                             }
 
+                            if(index%2 == 1){
+                                if(key == "html"){
+                                    $("#content").append("<div class='div_4'> " + "<span class='body'>"+convertKey+"</span><span class='body'><xmp>" + convertValue + "</xmp></span></div>");
+                                    $("#content").append("<div class='div_4'> " + "<span class='body'></span><span class='body'>"+convertValue+"</span></div>");
+                                }
+                                else if(key == "thumbnail_url"){
+                                    $("#content").append("<div class='div_4'> " + "<span class='body'>"+convertKey+"</span><span class='body'>"+convertValue+"</span></div>");
+                                    $("#content").append("<div class='div_4'> " + "<span class='body'></span><span class='body'>"+ "<img src="+value+"></span></div>");
+                                }
+                                else{
+                                    $("#content").append("<div class='div_4'> " + "<span class='body'>"+convertKey+"</span><span class='body'>" + convertValue + "</span></div>");
+                                }
+                            }
+                            else{
+                                if(key.includes("html")){
+                                    $("#content").append("<div class='div_4 grey'> " + "<span class='body'>"+convertKey+"</span><span class='body'><xmp>" + convertValue + "</xmp></span></div>");
+                                    $("#content").append("<div class='div_4 grey'> " + "<span class='body'></span><span class='body'>"+convertValue+"</span></div>");
+                                }
+                                else if(key == "thumbnail_url"){
+                                    $("#content").append("<div class='div_4 grey'> " + "<span class='body'>"+convertKey+"</span><span class='body'>"+convertValue+"</span></div>");
+                                    $("#content").append("<div class='div_4 grey'> " + "<span class='body'></span><span class='body'>"+ "<img src="+value+"></span></div>");
+                                }
+                                else{
+                                    $("#content").append("<div class='div_4 grey'> " + "<span class='body'>"+convertKey+"</span><span class='body'>" + convertValue + "</span></div>");
+                                }
+
+                            }
                         }
+                        index++;
                     }
-                    index++;
+                }
+                else{
+                    alert(result.rslt_MSG);
                 }
             }
         });
